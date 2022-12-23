@@ -6,7 +6,6 @@ import Link from "next/link";
 import UseOutsideHandler from "../helpers/clickOutsideWrapper";
 
 const NavMenu = () => {
-
   const dispatch = useDispatch();
   const [windowSize, setWindowSize] = useState(getWindowSize());
   const { nav } = useSelector((x) => x);
