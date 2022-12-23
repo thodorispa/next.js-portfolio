@@ -1,6 +1,5 @@
-
 import db from '../../../lib/mongodb.js'
-import Project from '../../../models/Project.js'
+import Project from '../../../models/Collab.js'
 
 export default async function userHandler(req, res) {
   await db();
@@ -9,7 +8,7 @@ export default async function userHandler(req, res) {
   switch (method) {
     case 'GET':
       try {
-        const projects = await Project.find() || []
+        const projects = await Project.find()
 
         return res.status(200).send(projects)
       } catch (e) {
