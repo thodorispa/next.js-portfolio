@@ -18,7 +18,6 @@ export default function Login() {
     e.preventDefault()
     try {
 
-
       if (segment === 'register') {
         let data = await axios.post('/api/account/register', { username, password, referral })
       }
@@ -42,10 +41,7 @@ export default function Login() {
       setError(error.response.data)
       console.log(error)
     }
-
-
   }
-
 
   return (
     <>

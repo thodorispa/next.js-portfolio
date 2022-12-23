@@ -34,6 +34,7 @@ export const authOptions = {
           account.lastLoginAt = Date.now()
 
           await account.save()
+
           return account.username;
           
         } catch (e) {

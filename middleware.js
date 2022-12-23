@@ -1,19 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
-
-
-export function middleware(req) {
-  // Call our authentication function to check the request
-  const jwt = req.cookies.get('jwt')?.value
-
-
-  if (!jwt) {
-    // Respond with JSON indicating an error message
-    return new NextResponse(
-      JSON.stringify({ success: false, message: 'authentication failed' }),
-      { status: 401, headers: { 'content-type': 'application/json' } }
-    )
-  }
-}
+export { default } from "next-auth/middleware"
 
 export const config = { 
   matcher: [
