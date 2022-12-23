@@ -11,10 +11,6 @@ import FrontPagePanel from "../../components/FrontPagePanel"
 import Projects from '../../src/pages/Projects.page'
 import Collaborations from '../../src/pages/Collaborations.page';
 import { signOut } from "next-auth/react"
-import getConfig from 'next/config'
-
-const { publicRuntimeConfig } = getConfig()
-const { NODE_ENV } = publicRuntimeConfig
 
 
 export default function Dashboard({ _projects, _media, _collaborations }) {
@@ -115,7 +111,7 @@ export async function getServerSideProps(req) {
     };
   }
 
-  const baseURI = NODE_ENV === 'production' ? "https://anna-papadopoulou-6bt9.vercel.app" : 'http://localhost:3000'
+  const baseURI = process.env.NODE_ENV=== 'production' ? "https://anna-papadopoulou-6bt9.vercel.app" : 'http://localhost:3000'
 
   const projects = await axios.get(baseURI + '/api/project')
   const collaborations = await axios.get(baseURI + '/api/collab')

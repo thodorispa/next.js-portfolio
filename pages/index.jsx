@@ -5,11 +5,6 @@ import { SmoothScrollProvider } from '../src/contexts/SmoothScroll.context'
 import axios from 'axios';
 import Loader from '../components/Loader'
 
-import getConfig from 'next/config'
-
-const { publicRuntimeConfig } = getConfig()
-const { NODE_ENV } = publicRuntimeConfig
-
 export default function Index({ _media }) {
 
   return _media ? (
@@ -23,7 +18,7 @@ export default function Index({ _media }) {
 
 export async function getServerSideProps() {
 
-  const baseURI = NODE_ENV === 'production' ? "https://anna-papadopoulou-6bt9.vercel.app" : 'http://localhost:3000'
+  const baseURI = process.env.NODE_ENV === 'production' ? "https://anna-papadopoulou-6bt9.vercel.app" : 'http://localhost:3000'
 
   const { data } = await axios.get(baseURI + '/api/media')
   const _media = data[0] || { name: '', images: [] }

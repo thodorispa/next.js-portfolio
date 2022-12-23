@@ -3,11 +3,6 @@ import Collaborations from '../../src/pages/Collaborations.page'
 import { SmoothScrollProvider } from '../../src/contexts/SmoothScroll.context'
 import axios from 'axios'
 
-import getConfig from 'next/config'
-
-const { publicRuntimeConfig } = getConfig()
-const { NODE_ENV } = publicRuntimeConfig
-
 const AllCollaborations = ({ _collaborations, baseURL }) => {
   return ( 
     <SmoothScrollProvider options={{ smooth: true }}>
@@ -19,7 +14,7 @@ const AllCollaborations = ({ _collaborations, baseURL }) => {
 export default AllCollaborations;
 
 export async function getServerSideProps(ctx) {
-  const baseURI = NODE_ENV === 'production' ? "https://anna-papadopoulou-6bt9.vercel.app" : 'http://localhost:3000'
+  const baseURI = process.env.NODE_ENV=== 'production' ? "https://anna-papadopoulou-6bt9.vercel.app" : 'http://localhost:3000'
   const { data } = await axios.get(baseURI + '/api/collab')
   const _collaborations = data || []
 
