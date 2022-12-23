@@ -1,0 +1,131 @@
+
+.navmenu {
+  display: flex;
+  justify-content: flex-start;
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  font-family: 'RobotoMono';
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
+.offview {
+  display: none;
+}
+
+.wide {
+  width: 100%;
+}
+
+.navlinks {
+  text-decoration: none;
+  list-style: none;
+  padding: 5px 12px;
+  margin:0;
+}
+.link {
+  margin: 0px 10px;
+  font-size: 18px;
+  color: #080808 ;
+  cursor: pointer;
+}
+
+.bar-toggle {
+  color:#080808;
+  align-self: flex-start;
+  padding: 20px 0px;
+  animation: fadeIn 1s;
+  cursor: pointer;
+}
+
+.add-background {
+  position: relative;
+  top:0;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.369);
+  background-blend-mode: screen;
+  -moz-box-shadow: 1px 2px 3px rgba(201, 201, 201, 0.11);
+  -webkit-box-shadow: 1px 2px 3px rgba(195, 195, 195, 0.114);
+  box-shadow: 1px 2px 3px rgba(196, 196, 196, 0.089);
+  backdrop-filter: blur(10px); 
+}
+
+.icon-default {
+  transition: transform .3s;
+}
+
+.icon-hover {
+  transition: transform .3s;
+  transform: rotate(-180deg);
+}
+
+.link {
+  background-image: linear-gradient(
+    to right,
+    #080808  ,
+    #080808  50%,
+    #080808 50%
+  );
+  background-size: 200% 100%;
+  background-position: -100%;
+  padding: 10px 0px;
+  position: relative;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.link:before {
+  content: '';
+  background: #080808  ;
+  display: block;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  transition: all 0.3s ease-in-out;
+}
+
+.link:hover {
+ background-position: 0;
+}
+
+.link:hover::before{
+  width: 100%;
+}
+.link-active {
+  background-position: 0;
+}
+.link-active::before {
+  width: 100%;
+}
+@media screen and (max-width: 850px) {
+  .bar-toggle {
+    position: relative;
+    left: 20px;
+  }
+}
+@media screen and (max-width: 950px) and (max-height: 400px) {
+  .link {
+    font-size: 14px;
+  }
+}
+@media screen and (max-width: 420px) {
+  .link:hover::before{
+    width: 90%;
+  } 
+  .link {
+    font-size: 16px;
+  }
+  .bar-toggle {
+    left: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {opacity:0;}
+  100% {opacity:1;}
+}

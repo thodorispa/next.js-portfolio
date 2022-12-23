@@ -1,0 +1,254 @@
+
+.panel {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  bottom: unset;
+  width: calc(100% - 30px);
+  max-width: 600px;
+  height: auto;
+  max-height: calc(100vh - 60px);
+  overflow-y: scroll;
+  flex-direction: column;
+  /* overflow: auto; */
+  color: #000000;
+  background-color: #cccffc;
+  /* background-color: #d5e3bc; */
+  border-radius: 4px;
+  padding: 10px;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+  z-index: 9999999999999;
+  box-shadow: 0 0 4px 0 rgba(0,0,0,0.4);
+  opacity: 1;
+  -webkit-transition: .25s ease-in-out;
+  transition: .25s ease-in-out;
+}
+.panel .hidden {
+  -webkit-transform: translate(-50%, -40px);
+  transform: translate(-50%, -40px);
+  opacity: 0;
+}
+.panel svg,
+.panel svg * {
+  color: unset;
+}
+
+
+.panel > header {
+  flex: 0 0 auto;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  padding-bottom: 10px;
+  border-bottom: 1px solid black;
+}
+
+.panel > section,
+.panel > article {
+  flex: 1 1 auto;
+  overflow: auto;
+  width: 100%;
+  padding: 10px 0;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  padding-bottom: 15px;
+}
+
+.panel > footer {
+  flex: 0 0 auto;
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid black;
+}
+
+.panel .group {
+  background-color: blacka0;
+}
+ .group.ghost {
+  background-color: transparent;
+  border: 1px dashed #d5e3bc;
+}
+
+.panel hr {
+  border-top: 1px solid black;
+}
+.panel hr[data-dashed] {
+  border-top: 1px dashed black;
+}
+
+.panel button {
+  background-color: black;
+  border: 1px solid black;
+  color: #000000;
+  padding: 0px 15px;
+}
+.panel button.positive {
+  color: white; 
+  border-color: #232fd3;
+  background-color: #232fd3;
+}
+.panel button.negative {
+  border-color: black;
+  background-color:   black;
+  color: white;
+}
+.panel button.secondary {
+  background-color: transparent;
+  color: black;
+}
+.panel button.secondary.negative {
+  color: tomato;
+}
+.panel button.secondary.positive {
+  color: rgb(22, 192, 22);
+}
+.panel button.textual {
+  color: black;
+}
+.panel button.textual.positive {
+  color: rgb(22, 192, 22);
+}
+.panel button.textual.negative {
+  color: tomato;
+}
+
+.panel input {
+  color: black;
+}
+.panel input:hover {
+  border: 1px solid black;
+}
+
+.panel input[type="text"]{
+  padding-left: 10px;
+  width: 300px;
+  max-width: 100%;
+}
+
+.panel .switch input {  
+  padding: 4px 8px;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 42px !important;
+  height: 24px !important;
+  flex: 0 0 auto !important;
+  background-color: #000000;;
+  border-radius: 25px;
+  outline: none;
+  cursor: pointer;
+  border-color: black;
+}
+.panel .switch input:checked {
+  background: black;
+  border-color: black;
+}
+.panel .switch:hover input:checked {
+  border-color: black;
+}
+.panel .switch input:before {
+  width: 18px;
+  height: 18px;
+  background-color: black;
+}
+.panel .switch input:checked:before {
+  background-color: #000000;
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+.panel .sortable-item {
+}
+
+
+.panel h1 {
+  color: #232fd3;
+  font-size: 35px;
+  font-weight: bolder;
+}
+
+.panel h2 {
+  color: black;
+  font-size: 20px;
+  font-weight: bolder;
+}
+ 
+ 
+
+.panel .sortable-item .sortable-handle {
+  width: 10px;
+  background-color: transparent;
+  color: #232fd3;
+  padding: 0;
+  border: 0;
+  transform: none !important;
+  transition: none !important;
+}
+
+.panel .test {
+  width: 10px;
+  background-color: transparent;
+  color: #232fd3;
+  padding: 0;
+  border: 0;
+  transform: none !important;
+  transition: none !important;
+}
+
+
+@keyframes in-animation {
+  0% {
+    border-radius: 25px;
+    left: 20px;
+    bottom: 20px;
+    max-width: 50px;
+    max-height: 50px;
+  }
+  100% {
+    border-radius: 0px;
+    left: 0;
+    bottom: 0;
+    max-width: calc(100vw - 0px);
+    max-height: calc(100vh - 0px);
+  }
+}
+
+@keyframes out-animation {
+  0% {
+    border-radius: 0px;
+    left: 0;
+    bottom: 0;
+    max-width: calc(100vw - 0px);
+    max-height: calc(100vh - 0px);
+  }
+  100% {
+    border-radius: 25px;
+    left: 20px;
+    bottom: 20px;
+    max-width: 50px;
+    max-height: 50px;
+  }
+}
+
+@keyframes in-animation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes out-animation {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
