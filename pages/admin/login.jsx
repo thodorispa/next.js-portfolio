@@ -12,7 +12,7 @@ export default function Login() {
   const [error, setError] = useState('')
 
   const [segment, setSegment] = useState('login')
-  const url = process.env.NODE_ENV === 'production' ? "https://anna-papadopoulou-6bt9.vercel.app" : "http://localhost:3000"
+  const url = process.env.NODE_ENV === 'production' ? "https://anna-papadopoulou-6bt9.vercel.app/admin" : "http://localhost:3000/admin"
 
   async function handleSubmit(e) {
     e.preventDefault()
