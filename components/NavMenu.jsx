@@ -10,6 +10,7 @@ const NavMenu = () => {
   const [windowSize, setWindowSize] = useState(getWindowSize());
   const { nav } = useSelector((x) => x);
   const { view } = useSelector((x) => x);
+  const { modal } = useSelector((x) => x);
   const { hideNav } = useSelector((x) => x);
   const [selection, setSelection] = useState(0);
   const [selectedLink, setSelectedLink] = useState(0);
@@ -43,7 +44,7 @@ const NavMenu = () => {
 
   return view && !hideNav ? (
     <header>
-      <nav className="navmenu">
+      <nav className={`navmenu ${modal ? 'hide-nav' : ''}`}>
         <motion.ul
           className="navlinks"
           variants={container}
@@ -121,7 +122,7 @@ const NavMenu = () => {
     view ? 
       <>
       <header>
-      <nav ref={wrapperRef} className="navmenu">
+      <nav ref={wrapperRef} className={`navmenu ${modal ? 'hide-nav' : ''}`}>
         <motion.ul
           className="navlinks"
           variants={containerSmall}
@@ -219,7 +220,7 @@ const NavMenu = () => {
     <header>
       <motion.nav 
       ref={wrapperRef} 
-      className="navmenu wide"
+      className={`navmenu wide ${modal ? 'hide-nav' : ''}`}
       initial={{x: "-100%"}}
       animate={
         nav
@@ -230,9 +231,18 @@ const NavMenu = () => {
                 type: "spring",
                 stiffness: 400,
                 damping: 50,
+                bounce: 0,
               },
             }
-          : {}
+          : {
+            transition: {
+              duration: 0.4,
+              type: "spring",
+              stiffness: 400,
+              damping: 50,
+              bounce: 0,
+            },
+          }
       }>
         <motion.ul
           className="navlinks add-background wide"
@@ -299,10 +309,18 @@ const NavMenu = () => {
                     type: "spring",
                     stiffness: 300,
                     damping: 40,
+                    bounce: 0,
                   },
                 }
               : {
-                  x: -10
+                  x: -10,
+                  transition: {
+                    duration: 0.4,
+                    type: "spring",
+                    stiffness: 300,
+                    damping: 40,
+                    bounce: 0,
+                  },
                 }
           }
           transition= {{

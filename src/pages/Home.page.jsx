@@ -36,6 +36,7 @@ export default function Home({ media }) {
   }
 
   const handleClick = (image) => {
+    dispatch({ type: "TOGGLE_MODAL", payload: true });
     setImage(image)
     setClickedImg(image)
   }
@@ -81,6 +82,7 @@ export default function Home({ media }) {
               variants={container}
               initial="hidden"
               animate="show"
+              exit="hidden"
               className="name">
               <motion.h1 className="project-title" variants={item}>
                 Anna Papadopoulou
@@ -189,6 +191,7 @@ export default function Home({ media }) {
         variants={container}
         initial="hidden"
         animate="show"
+        exit="hidden"
         className="project-feed">
         <motion.h1 variants={item}>
           There is nothing to show here.

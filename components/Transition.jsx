@@ -21,8 +21,7 @@ const Transition = ({ children }) => {
 
   return (
     <AnimatePresence
-	      initial={false}
-	      exitBeforeEnter
+      initial={false}
     >
       <motion.div
       key={asPath}

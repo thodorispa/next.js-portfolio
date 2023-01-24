@@ -9,6 +9,7 @@ import frontPanelReducer from './reducers/frontPanelReducer'
 import collabPanelReducer from './reducers/collabPanelReducer'
 import viewReducer from './reducers/viewReducer'
 import hideNavReducer from './reducers/hideNavReducer'
+import modalReducer from './reducers/modalReducer'
 
 
 
@@ -20,6 +21,7 @@ export const store = configureStore({
     nav: navReducer,
     hideNav: hideNavReducer,
     view: viewReducer,
+    modal: modalReducer,
     project: projectReducer,
     collabPanel: collabPanelReducer,
   }

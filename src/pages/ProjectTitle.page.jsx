@@ -17,6 +17,7 @@ const ProjectTitle = ({ project }) => {
   const [arrVisible, setArrVisible] = useState(false);
 
   const handleClick = (image, i) => {
+    dispatch({ type: "TOGGLE_MODAL", payload: true });
     setClickedImg(image);
     setImage(image);
   };

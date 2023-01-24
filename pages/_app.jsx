@@ -5,6 +5,8 @@ import { getSession, SessionProvider }from 'next-auth/react' ;
 
 import { store } from "../store/index";
 
+import { AnimatePresence } from  'framer-motion'
+
 import NavMenu from "../components/NavMenu"
 import Init from "../components/Init"
 import Transition from "../components/Transition"
@@ -20,9 +22,9 @@ import "../styles/admin.css";
 import "../styles/contact.css";
 
 
-const MyApp = ({ Component, pageProps}) => {
+const MyApp = ({ Component, pageProps, router }) => {
 
-  const { user, nav, view, hideNav, session } = pageProps
+  const { user, nav, view, modal, hideNav, session } = pageProps
 
   return (
     <>
@@ -34,7 +36,7 @@ const MyApp = ({ Component, pageProps}) => {
           <NavMenu {...pageProps} />
           <Transition>
             <main data-scroll-container>
-              <Component {...pageProps} />
+              <Component {...pageProps} key={router.route}/>
             </main>
           </Transition>
         </Provider>

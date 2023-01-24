@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const Contact = () => {
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence>
       <>
         <motion.section
           className="contact-container"

@@ -2,11 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image'
 import { motion, AnimatePresence } from "framer-motion";
 import { container, item } from '../styles/framer-motion/AnimateModal'
+import { useDispatch } from 'react-redux'
 
 const ImageModal = ({ image, setImage, images, setClickedImg }) => {
 
+  const dispatch = useDispatch();
+
   const closeModal = (e) => {
     if (e.target.classList.contains("close-modal")) {
+      dispatch({ type: "TOGGLE_MODAL", payload: false });
       setImage(null)
       setClickedImg(null)
     }
@@ -50,6 +54,7 @@ const ImageModal = ({ image, setImage, images, setClickedImg }) => {
         handleRotationRight()
         break;
       case 'Escape':
+        dispatch({ type: "TOGGLE_MODAL", payload: false });
         setImage(null)
         setClickedImg(null)
         image = null

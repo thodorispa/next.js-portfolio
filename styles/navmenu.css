@@ -9,6 +9,11 @@
   font-family: 'RobotoMono';
   letter-spacing: 2px;
   font-weight: 400;
+  z-index: 1;
+}
+
+.hide-nav {
+  z-index: -1;
 }
 
 .offview {
