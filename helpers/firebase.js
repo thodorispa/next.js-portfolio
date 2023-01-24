@@ -5,7 +5,6 @@ import { getPlaiceholder } from "plaiceholder";
 
 export async function uploadToFirebaseStorage(image, firebaseOptions, path = '') {
   const app = getApps().length === 0 ? initializeApp(firebaseOptions) : getApp();
-  // const app = initializeApp(firebaseOptions);
   const storage = getStorage(app);
   const hash = SparkMD5.hash(image.url.split('base64,')[1])
   let imagesRef = '';
@@ -15,10 +14,12 @@ export async function uploadToFirebaseStorage(image, firebaseOptions, path = '')
     imagesRef = ref(storage, hash)
   }
 
+  console.log('disco' , image.width, image.height);
+
   const fileRef = ref(imagesRef)
   const metadata = {
     alt: image.alt || 'This is an image taken by a good photographer',
-    width: image.width,
+    width: image.width, 
     height: image.height,
     cacheControl: 'public,max-age=300'
   }

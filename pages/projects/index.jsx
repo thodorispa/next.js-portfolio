@@ -13,9 +13,10 @@ const AllProjects = ({ _projects }) => {
 export default AllProjects;
 
 export async function getServerSideProps(ctx) {
-  const baseURI = process.env.NODE_ENV=== 'production' ? "https://anna-papadopoulou-6bt9.vercel.app" : 'http://localhost:3000'
+  const baseURI = process.env.NODE_ENV=== 'production' ? "https://annapapadopoulou.me/" : 'http://localhost:3000'
 
   const { data } = await axios.get(baseURI + '/api/project')
+  
   let _projects = data || []
 
   return {

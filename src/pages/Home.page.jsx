@@ -5,12 +5,10 @@ import { container, item } from '../../styles/framer-motion/AnimateMain'
 import { motion, Variants, AnimatePresence } from "framer-motion";
 import { SmoothScrollContext } from '../contexts/SmoothScroll.context'
 import ImageModal from '../../components/ImageModal'
-import Loader from '../../components/Loader'
 import { useDispatch, useSelector } from "react-redux";
 
 export default function Home({ media }) {
 
-  const [showButton, setShowButton] = useState(true)
   const { scroll } = useContext(SmoothScrollContext)
   const { view } = useSelector(x => x)
   const { hideNav } = useSelector(x => x)
@@ -21,15 +19,7 @@ export default function Home({ media }) {
   const [arrVisible, setArrVisible] = useState(false)
   const [imageIsLoaded, setImageIsLoaded] = useState(false);
   const flag = media.images.length > 0;
-
-  const myLoader = ({ src, width, quality }) => {
-    return `https://example.com/${src}?w=${width}&q=${quality || 75}`
-  }
-
-  const doFadeIn = () => {
-    setImageIsLoaded(true);
-  };
-
+  
   const goToTop = event => {
     event.preventDefault()
     scroll && scroll.scrollTo(0)
@@ -134,12 +124,11 @@ export default function Home({ media }) {
                       onClick={() => handleClick(image)}
                       onLoad={event => {
                         const target = event.target;
-                        // next/image use an 1x1 px git as placeholder. We only want the onLoad event on the actual image
                         if (image.url.indexOf('data:image/webp;base64') < 0) {
                           setImageIsLoaded(true)
                         }
                       }} />
-                      <span>{image.caption}</span>
+                      <span dangerouslySetInnerHTML={{__html:image.caption}}></span>
                   </motion.div>
                 </motion.div>
               ))

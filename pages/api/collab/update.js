@@ -5,6 +5,14 @@ import { uploadToFirebaseStorage } from '../../../helpers/firebase.js'
 import slugify from "slugify";
 import { firebaseOptions } from '../../../lib/firebaseOptions.js';
 
+export const config = {
+  api: {
+      bodyParser: {
+          sizeLimit: '30mb' // Set desired value here
+      }
+  }
+}
+
 export default async function userHandler(req, res) {
   await db();
   const { method } = req

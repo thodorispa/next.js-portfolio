@@ -90,7 +90,6 @@ const ProjectTitle = ({ project }) => {
             .sort((a, b) => a.index - b.index)
             .slice(1)
             .map((image, i) => (
-              
               <section key={i} className="project-images">
                 <OptImage 
                   src={image.url}
@@ -103,7 +102,7 @@ const ProjectTitle = ({ project }) => {
                   loading="lazy"
                   onClick={() => handleClick(image, i)}
                 />
-                <span>{image.caption}</span>
+                <span dangerouslySetInnerHTML={{__html:image.caption}}></span>
               </section>
             ))}
         </section>

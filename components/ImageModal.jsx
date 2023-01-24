@@ -112,8 +112,8 @@ const ImageModal = ({ image, setImage, images, setClickedImg }) => {
               priority
               src={image.url}
               alt={image.alt || 'image zoom'}
-              width={image.width}
-              height={image.height}
+              width={600}
+              height={600}
               unoptimized={() => { n.objectUrl }}
             />
           </article>

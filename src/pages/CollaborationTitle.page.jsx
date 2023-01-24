@@ -105,7 +105,7 @@ const CollaborationTitle = ({ collaboration }) => {
                   loading="lazy"
                   onClick={() => handleClick(image, i)}
                 />
-                <span>{image.caption}</span>
+                <span dangerouslySetInnerHTML={{__html:image.caption}}></span>
               </motion.section>
             ))}
         </section>

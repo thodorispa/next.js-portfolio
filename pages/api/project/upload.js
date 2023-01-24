@@ -6,6 +6,14 @@ import { firebaseOptions } from '../../../lib/firebaseOptions.js';
 
 import slugify from "slugify";
 
+export const config = {
+  api: {
+      bodyParser: {
+          sizeLimit: '30mb' // Set desired value here
+      }
+  }
+}
+
 export default async function userHandler(req, res) {
   await db();
   const { method } = req
@@ -18,23 +26,6 @@ export default async function userHandler(req, res) {
         const { description } = req.body
         const { images } = req.body || []
         const { active } = req.body;
-
-        // for (let i = 0; i < images.length; i++) {
-        //   const image = images[i]
-
-        //   const base64 = image.url.replace(/^data:image\/\w+;base64,/, "");
-        //   const buffer = Buffer.from(base64, 'base64');
-
-        //   const data = await sharp(buffer)
-        //     .toFormat('webp')
-        //     .webp({ quality: 80 })
-        //     .toBuffer();
-
-        //   const base64Image = 'data:image/webp;base64,' + data.toString('base64');
-
-
-        //   image.url = base64Image
-        // }
 
         const existing = await Project.findOne({ title })
 

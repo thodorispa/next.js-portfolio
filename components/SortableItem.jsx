@@ -19,7 +19,7 @@ export function SortableItem(props) {
   };
 
 
-  if (!props.new) {
+  // if (!props.new) {
     return (
       <div
         ref={setNodeRef}
@@ -37,17 +37,17 @@ export function SortableItem(props) {
         {props.children}
       </div>
     );
-  } else {
-    return (
-      <div
-        ref={setNodeRef}
-        className={'sortable-item'}
-        style={{ ...props.style, ...style }}
-      >
+  // } else {
+  //   return (
+  //     <div
+  //       ref={setNodeRef}
+  //       className={'sortable-item'}
+  //       style={{ ...props.style, ...style }}
+  //     >
         
 
-        {props.children}
-      </div>
-    )
-  }
+  //       {props.children}
+  //     </div>
+  //   )
+  // }
 }

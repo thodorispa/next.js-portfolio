@@ -3,6 +3,14 @@ import db from '../../../lib/mongodb.js'
 import { uploadToFirebaseStorage } from '../../../helpers/firebase.js';
 import { firebaseOptions } from '../../../lib/firebaseOptions.js';
 
+export const config = {
+  api: {
+      bodyParser: {
+          sizeLimit: '30mb' 
+      }
+  }
+}
+
 export default async function userHandler(req, res) {
   await db();
   const { method } = req

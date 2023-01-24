@@ -9,6 +9,14 @@ import { faPlus, faCheck, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import Spinner from "../components/Spinner"
 
 import isEqual from "lodash.isequal"
+import dynamic from 'next/dynamic'
+
+const ReactQuill = dynamic(
+  () => {
+    return import('react-quill');
+  },
+  { ssr: false }
+);
 
 import {
   arrayMove,
@@ -33,7 +41,8 @@ export default function FrontPagePanel({ _media }) {
   const [media, setMedia] = useState(_media);
   const [editedMedia, setEditedMedia] = useState(_media);
   const [isLoading, setIsLoading] = useState(false);
-
+  const [imageAttributes, setImageAttributes] = useState({});
+  const [caption, setCaption] = useState('');
 
   const accept = ['image/jpeg', 'image/png']
   const sensors = useSensors(
@@ -47,6 +56,11 @@ export default function FrontPagePanel({ _media }) {
     setMedia(_media);
     setEditedMedia(_media);
   }, [_media])
+
+
+  useEffect(() => {
+    setEditedMedia(editedMedia => ({ ...editedMedia, images: editedMedia?.images.map(n => n.url === imageAttributes?.url ? { ...n, caption: caption } : n) }))
+  }, [caption]);
 
   const onUpdate = async () => {
     setIsLoading(true);
@@ -112,8 +126,189 @@ export default function FrontPagePanel({ _media }) {
 
         <div className="spacer" />
 
-        {/* Media */}
         <section className="fw">
+          <article>
+
+            <h2>Images</h2>
+            <div className="spacer" />
+
+            <label
+              htmlFor='file-input'
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '30px',
+                height: '30px',
+                border: '1px dashed black',
+                textAlign: 'center',
+                fontSize: '32px',
+                padding: '10px 12px',
+                margin: '2.5px',
+                cursor: 'pointer',
+                color: 'var(--pb-primary-color)',
+              }}
+            >
+              <FontAwesomeIcon
+                style={{ width: '25px', height: '25px' }}
+                icon={faPlus} />
+            </label>
+
+            <input
+              id={'file-input'}
+              type='file'
+              // disabled={hasDrag}
+              multiple={true}
+              accept={accept.join()}
+              name='new-files'
+              style={{
+                width: 0,
+                height: 0,
+                opacity: 0,
+                padding: 0,
+                margin: 0,
+                visibility: 'hidden',
+                overflow: 'hidden',
+              }}
+              onChange={e => handleFileChange(e)}
+            />
+
+            {editedMedia?.images && editedMedia?.images.length > 0 ? (
+              <button
+                className="positive negative"
+                style={{ padding: '0px 5px' }}
+                onClick={() => {
+                  const c = confirm("Are you sure you want remove uploaded files?")
+                  if (c) {
+                    setEditedMedia({ ...editedMedia, images: [] })
+                  }
+                }}
+              >
+                Clear media
+              </button>
+            ) : null}
+          </article>
+
+          <div className="spacer" />
+
+          <section
+            className='fw group'
+            style={{
+              justifyContent: 'flex-start'
+            }}
+          >
+            <section>
+              <DndContext
+                sensors={sensors}
+                collisionDetection={closestCenter}
+                onDragEnd={handleDragEnd}
+              >
+                <SortableContext
+                  items={editedMedia?.images?.map(n => n.url)}
+                  strategy={rectSortingStrategy}
+                >
+                  <article
+                  style={{
+                    justifyContent: 'flex-start',
+                  }}>
+
+                    {editedMedia?.images?.map((n, i) => (
+                      <article key={i}>
+                        <SortableItem
+                          key={n.url}
+                          id={n.url}
+                          new={editedMedia?.id === -1 ? true : false}
+                          removable={true}
+                          style={{
+                            position: 'relative',
+                            margin: '2.5px',
+                            width: '130px',
+                            height: '120px',
+                          }}
+                          dragHandleStyle={{
+                            position: 'absolute',
+                            top: '5px',
+                            left: '5px',
+                          }}
+                        >
+                          <Image
+                            draggable={false}
+                            priority
+                            src={n.objectUrl ? n.objectUrl : n.url}
+                            alt={n.alt || ''}
+                            style={{
+                              width: '100%',
+                              height: '100%',
+                              cursor: 'pointer',
+                              borderRadius: n.url === imageAttributes?.url ? '50% 20% / 10% 40%' : '0px'
+                              ,
+                            }}
+                            width={n.width}
+                            height={n.height}
+                            unoptimized={() => { n.objectUrl }}
+                            onClick={() => {
+                              setImageAttributes(n)
+                            }}
+                          />
+                          <button
+                            className="negative"
+                            style={{
+                              position: 'absolute',
+                              top: '5px',
+                              right: '5px',
+                              flex: '0 0 16px',
+                              width: '16px',
+                              height: '16px',
+                              color: 'tomato',
+                              padding: '0',
+                              border: '0',
+                              backgroundColor: 'transparent',
+                              transition: 'none',
+                              transform: 'none',
+                            }}
+                            onClick={() => handleImageDelete(i)}
+                          >
+                            <FontAwesomeIcon icon={faTrashAlt} />
+                          </button>
+
+                        </SortableItem>
+                      </article>
+                    ))}
+                  </article>
+                </SortableContext>
+              </DndContext>
+            </section>
+
+          </section>
+          {editedMedia?.images?.length > 0 ? (
+            <section >
+              {/* Caption */}
+              <section className="fw">
+                <h2>Image Caption</h2>
+                <ReactQuill value={caption} onChange={setCaption} />
+              </section>
+              <div className='spacer'></div>
+              <textarea
+                type="text"
+                rows={2}
+                cols={30}
+                value={imageAttributes.alt}
+                // value={{ ...n }.alt || ''}
+                onChange={(e) => {
+                  const _images = [...editedMedia.images]
+                  const _image = _images.find(x => x.url === imageAttributes.url)
+                  _image.alt = e.target.value || ''
+                  setEditedMedia({ ...editedMedia, images: _images })
+                  setImageAttributes({ ...imageAttributes, alt: e.target.value })
+                }}
+                placeholder='Alt text'
+              />
+            </section>
+          ) : null}
+        </section>
+
+        {/* Media */}
+        {/* <section className="fw">
           <article>
 
             <h2>Images</h2>
@@ -289,7 +484,7 @@ export default function FrontPagePanel({ _media }) {
               onChange={e => handleFileChange(e)}
             />
           </section>
-        </section>
+        </section> */}
 
         <div className="spacer" />
       </main>

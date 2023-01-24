@@ -38,32 +38,40 @@ const defaultProject = {
   active: true
 };
 
-import { useQuill } from 'react-quilljs';
+import dynamic from 'next/dynamic'
+
+const ReactQuill = dynamic(
+  () => {
+    return import('react-quill');
+  },
+  { ssr: false }
+);
 
 export default function CollabPanel() {
-
-  const { quill, quillRef } = useQuill();
-
   const dispatch = useDispatch();
   const { collabPanel } = useSelector(x => x)
   const { project } = useSelector(x => x)
 
   const [originalProject, setOriginalProject] = useState(cloneDeep(project) || defaultProject);
   const [editedProject, setEditedProject] = useState(cloneDeep(project) || defaultProject);
+  const [imageAttributes, setImageAttributes] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    if (quill) {
-      quill.on('text-change', function (delta, oldDelta, source) {
-        if (source === 'user') {
-          setEditedProject({ ...editedProject, description: quill.root.innerHTML })
-          // show description in the editor of quill
+  const [description, setDescription] = useState('');
+  const [caption, setCaption] = useState('');
 
-        }
-      });
-    }
-  }, [quill, editedProject]);
+  useEffect(() => {
+    setEditedProject(editedProject => ({ ...editedProject, description: description }))
+  }, [description]);
+
+  useEffect(() => {
+    setDescription(originalProject?.description || '')
+  }, [originalProject], []);
+
+  useEffect(() => {
+    setEditedProject(editedProject => ({ ...editedProject, images: editedProject?.images.map(n => n.url === imageAttributes?.url ? { ...n, caption: caption } : n) }))
+  }, [caption]);
 
   const accept = ['image/jpeg', 'image/png']
   const sensors = useSensors(
@@ -171,15 +179,17 @@ export default function CollabPanel() {
 
         <div className="spacer" />
 
-        {/* Title */}
+        {/* Sub Title */}
         <section className="fw">
           <h2>Sub Title</h2>
-          <input
+          <textarea
             style={{ backgroundColor: 'white' }}
-            type='text'
             value={editedProject?.subTitle}
             onChange={(e) => setEditedProject({ ...editedProject, subTitle: e.target.value })}
-          />
+            rows={2}
+            cols={50}
+          >
+          </textarea>
         </section>
 
         <div className="spacer" />
@@ -187,7 +197,7 @@ export default function CollabPanel() {
         {/* Description */}
         <section className="fw">
           <h2>Description</h2>
-          <div ref={quillRef}></div>
+          <ReactQuill value={description} onChange={setDescription} />
         </section>
 
         <div className="spacer" />
@@ -198,6 +208,47 @@ export default function CollabPanel() {
 
             <h2>Images</h2>
             <div className="spacer" />
+
+            <label
+              htmlFor='file-input'
+              style={{
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                width: '30px',
+                height: '30px',
+                border: '1px dashed black',
+                textAlign: 'center',
+                fontSize: '32px',
+                padding: '10px 12px',
+                margin: '2.5px',
+                cursor: 'pointer',
+                color: 'var(--pb-primary-color)',
+              }}
+            >
+              <FontAwesomeIcon
+                style={{ width: '25px', height: '25px' }}
+                icon={faPlus} />
+            </label>
+
+            <input
+              id={'file-input'}
+              type='file'
+              // disabled={hasDrag}
+              multiple={true}
+              accept={accept.join()}
+              name='new-files'
+              style={{
+                width: 0,
+                height: 0,
+                opacity: 0,
+                padding: 0,
+                margin: 0,
+                visibility: 'hidden',
+                overflow: 'hidden',
+              }}
+              onChange={e => handleFileChange(e)}
+            />
 
             {editedProject?.images && editedProject?.images.length > 0 ? (
               <button
@@ -223,8 +274,7 @@ export default function CollabPanel() {
               justifyContent: 'flex-start'
             }}
           >
-            <article>
-
+            <section>
               <DndContext
                 sensors={sensors}
                 collisionDetection={closestCenter}
@@ -234,7 +284,10 @@ export default function CollabPanel() {
                   items={editedProject?.images?.map(n => n.url)}
                   strategy={rectSortingStrategy}
                 >
-                  <section>
+                  <article
+                  style={{
+                    justifyContent: 'flex-start',
+                  }}>
 
                     {editedProject?.images?.map((n, i) => (
                       <article key={i}>
@@ -246,8 +299,8 @@ export default function CollabPanel() {
                           style={{
                             position: 'relative',
                             margin: '2.5px',
-                            width: '140px',
-                            height: '140px',
+                            width: '130px',
+                            height: '120px',
                           }}
                           dragHandleStyle={{
                             position: 'absolute',
@@ -263,10 +316,16 @@ export default function CollabPanel() {
                             style={{
                               width: '100%',
                               height: '100%',
+                              cursor: 'pointer',
+                              borderRadius: n.url === imageAttributes?.url ? '50% 20% / 10% 40%' : '0px'
+                              ,
                             }}
                             width={n.width}
                             height={n.height}
                             unoptimized={() => { n.objectUrl }}
+                            onClick={() => {
+                              setImageAttributes(n)
+                            }}
                           />
                           <button
                             className="negative"
@@ -290,96 +349,41 @@ export default function CollabPanel() {
                           </button>
 
                         </SortableItem>
-
-                        <section >
-                          {/* <Quill
-                            value={{ ...n }.caption || ''}
-                            onChange={(e) => {
-                              const _ = [...(editedProject?.images || [])]
-                              _.splice(i, 1, { ...n, caption: e })
-                              setEditedProject({ ...editedProject, images: _ })
-                            }}
-                             /> */}
-                          <textarea
-                            type="text"
-                            rows={2}
-                            cols={30}
-                            placeholder='Caption'
-                            value={{ ...n }.caption || ''}
-                            onChange={(e) => {
-                              const _ = [...(editedProject?.images || [])]
-                              _.splice(i, 1, { ...n, caption: e.target.value })
-                              setEditedProject({ ...editedProject, images: _ })
-                            }}
-                          />
-                          <div className='spacer'></div>
-                          <textarea
-                            type="text"
-                            rows={2}
-                            cols={30}
-                            value={{ ...n }.alt || ''}
-                            onChange={(e) => {
-                              const _ = [...(editedProject?.images || [])]
-                              _.splice(i, 1, { ...n, alt: e.target.value })
-                              setEditedProject({ ...editedProject, images: _ })
-                            }}
-                            placeholder='Alt text'
-                          />
-                        </section>
                       </article>
-
                     ))}
-                  </section>
+                  </article>
                 </SortableContext>
               </DndContext>
+            </section>
 
-
-
-            </article>
-
-            <label
-              htmlFor='file-input'
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100px',
-                height: '100px',
-                border: '2px dashed black',
-                textAlign: 'center',
-                fontSize: '32px',
-                padding: '10px 12px',
-                margin: '2.5px',
-                cursor: 'pointer',
-                color: 'var(--pb-primary-color)',
-              }}
-            >
-              <FontAwesomeIcon icon={faPlus} />
-            </label>
-
-            <input
-              id={'file-input'}
-              type='file'
-              // disabled={hasDrag}
-              multiple={true}
-              accept={accept.join()}
-              name='new-files'
-              style={{
-                width: 0,
-                height: 0,
-                opacity: 0,
-                padding: 0,
-                margin: 0,
-                visibility: 'hidden',
-                overflow: 'hidden',
-              }}
-              onChange={e => handleFileChange(e)}
-            />
           </section>
+          {editedProject?.images?.length > 0 ? (
+            <section >
+              {/* Caption */}
+              <section className="fw">
+                <h2>Image Caption</h2>
+                <ReactQuill value={caption} onChange={setCaption} />
+              </section>
+              <div className='spacer'></div>
+              <textarea
+                type="text"
+                rows={2}
+                cols={30}
+                value={imageAttributes.alt}
+                // value={{ ...n }.alt || ''}
+                onChange={(e) => {
+                  const _images = [...editedProject.images]
+                  const _image = _images.find(x => x.url === imageAttributes.url)
+                  _image.alt = e.target.value || ''
+                  setEditedProject({ ...editedProject, images: _images })
+                  setImageAttributes({ ...imageAttributes, alt: e.target.value })
+                }}
+                placeholder='Alt text'
+              />
+            </section>
+          ) : null}
         </section>
-
-
-
+        
         <div className="spacer" />
       </main>
 

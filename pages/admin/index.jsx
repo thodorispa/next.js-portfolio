@@ -12,10 +12,11 @@ import Projects from '../../src/pages/Projects.page'
 import Collaborations from '../../src/pages/Collaborations.page';
 import { signOut } from "next-auth/react"
 
+import { Editor, Quill } from '../../components/Editor';
+
 
 export default function Dashboard({ _projects, _media, _collaborations }) {
   const { data: session } = useSession();
-  console.log('client', session);
 
   const dispatch = useDispatch();
   const router = useRouter()
@@ -41,7 +42,6 @@ export default function Dashboard({ _projects, _media, _collaborations }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-
       {panel && <ProjectPanel />}
       {collabPanel && <CollabPanel />}
       {frontPanel && <FrontPagePanel _media={_media} />}
@@ -50,7 +50,6 @@ export default function Dashboard({ _projects, _media, _collaborations }) {
       <Projects projects={_projects} />
       <hr data-dashed />
       <Collaborations collaborations={_collaborations} />
-
 
       <article>
         <article className="admin-actions">
@@ -111,7 +110,7 @@ export async function getServerSideProps(req) {
     };
   }
 
-  const baseURI = process.env.NODE_ENV=== 'production' ? "https://anna-papadopoulou-6bt9.vercel.app" : 'http://localhost:3000'
+  const baseURI = process.env.NODE_ENV=== 'production' ? "https://annapapadopoulou.me/" : 'http://localhost:3000'
 
   const projects = await axios.get(baseURI + '/api/project')
   const collaborations = await axios.get(baseURI + '/api/collab')

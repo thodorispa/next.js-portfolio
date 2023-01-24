@@ -20,7 +20,7 @@ import Loader from '../../components/Loader'
  export async function getServerSideProps(ctx) {
   const slug = ctx.resolvedUrl.split("collaborations/")[1]
 
-  const baseURI = process.env.NODE_ENV=== 'production' ? "https://anna-papadopoulou-6bt9.vercel.app" : 'http://localhost:3000'
+  const baseURI = process.env.NODE_ENV=== 'production' ? "https://annapapadopoulou.me/" : 'http://localhost:3000'
   const { data } = await axios.get(baseURI + "/api/collab/" + slug)
   const { collaboration } = data || []
   

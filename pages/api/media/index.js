@@ -10,7 +10,6 @@ export default async function userHandler(req, res) {
     case 'GET':
       try {
         const images = await Images.find()
-    
         return res.status(200).send(images)
       } catch (e) {
         console.log(e);
