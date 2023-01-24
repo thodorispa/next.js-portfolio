@@ -12,7 +12,7 @@ export default function Login() {
   const [error, setError] = useState('')
 
   const [segment, setSegment] = useState('login')
-  const url = process.env.NODE_ENV === 'production' ? "https://annapapadopoulou.meadmin" : "http://localhost:3000/admin"
+  const url = process.env.NODE_ENV === 'production' ? "https://annapapadopoulou.me/admin" : "http://localhost:3000/admin"
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -30,8 +30,7 @@ export default function Login() {
       }).then(response => {
         if (response.ok) {
           router.push("/admin")
-        } else {
-        }
+        } 
       }).catch(error => {
         console.log(error)
       })
