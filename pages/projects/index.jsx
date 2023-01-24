@@ -12,11 +12,10 @@ const AllProjects = ({ _projects }) => {
 
 export default AllProjects;
 
-export async function getServerSideProps(ctx) {
-  const baseURI = process.env.NODE_ENV=== 'production' ? "https://annapapadopoulou.me" : 'http://localhost:3000'
+export async function  getStaticProps() {
+  const baseURI = process.env.NODE_ENV === 'production' ? "https://annapapadopoulou.me" : 'http://localhost:3000'
 
   const { data } = await axios.get(baseURI + '/api/project')
-  
   let _projects = data || []
 
   return {
