@@ -29,14 +29,12 @@ export default async function userHandler(req, res) {
         const _imagesToUpload = images.filter(image => !image.hash)
 
         for (let i = 0; i < _imagesToDelete.length; i++) {
-          console.log('deleting-------->', _imagesToUpload[i]);
           const image = _frontImages.images.find(image => image.hash === _imagesToDelete[i])
 
           const res = await deleteFromFirebaseStorage(image.hash, firebaseOptions, 'front/')
         }
 
         for (let i = 0; i < _imagesToUpload.length; i++) {
-          console.log('uploading-------->', _imagesToUpload[i]);
           const { url, hash, base64 } = await uploadToFirebaseStorage(_imagesToUpload[i], firebaseOptions, 'front/')
 
           _imagesToUpload[i].url = url
