@@ -34,7 +34,7 @@ export default async function userHandler(req, res) {
     
           const savedAccount = await account.save()
     
-          const token = jwt.sign({ savedAccount }, process.env.JWT_SECRET)
+          const token = jwt.sign({ savedAccount }, process.env.SECRET)
     
     
           req.account = savedAccount;

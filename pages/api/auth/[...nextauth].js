@@ -4,7 +4,6 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import Account from '../../../models/Account';
 import bcrypt from 'bcrypt';
-import jwt from 'jsonwebtoken';
 
 export const authOptions = {
   providers: [
@@ -18,18 +17,16 @@ export const authOptions = {
           const password = credentials.password
           const account = await Account.findOne({ username })
           if (!account) {
-            console.log("Invalid credentials1");
+            console.log("Invalid credentials");
 
             return;
           }
 
           const match = await bcrypt.compare(password, account.password)
           if (!match) {
-            console.log("Invalid credentials2");
+            console.log("Invalid credentials");
             return ;
           }
-
-          const token = jwt.sign({ account }, process.env.JWT_SECRET || '123')
 
           account.lastLoginAt = Date.now()
 
@@ -52,8 +49,9 @@ export const authOptions = {
     maxAge: 30 * 24 * 60 * 60,
   },
   jwt: {
-    signingKey: process.env.JWT_SECRET,
+    signingKey: process.env.SECRET,
   },
+  secret: process.env.SECRET,
   callbacks: {
     async session({ session, token }) {
       session.user = token.user;

@@ -49,9 +49,8 @@ const MyApp = ({ Component, pageProps, router }) => {
 
 MyApp.getInitialProps = async (ctx) => {
   const { pageProps } = await App.getInitialProps(ctx)
-  const session = await getSession(ctx.ctx);
 
-  return { pageProps: { ...pageProps, session} }
+  return { pageProps: { ...pageProps} }
 }
 
 export default MyApp;

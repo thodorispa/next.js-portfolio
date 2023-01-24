@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import React, { useState } from "react";
 import axios from 'axios';
-import { useRouter } from "next/router";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getSession, useSession } from "next-auth/react";
@@ -11,28 +10,13 @@ import FrontPagePanel from "../../components/FrontPagePanel"
 import Projects from '../../src/pages/Projects.page'
 import Collaborations from '../../src/pages/Collaborations.page';
 import { signOut } from "next-auth/react"
-
-import { Editor, Quill } from '../../components/Editor';
+import { getSessionFromCookie } from '../../helpers/getSessionFromCookie';
 
 
 export default function Dashboard({ _projects, _media, _collaborations }) {
-  const { data: session } = useSession();
-
   const dispatch = useDispatch();
-  const router = useRouter()
-  const { panel, collabPanel, frontPanel } = useSelector(x => x)
 
-  async function logout(e) {
-    e.preventDefault()
-    try {
-      const data = await axios.post("api/account/logout")
-      if (data) {
-        router.push('/')
-      }
-    } catch (error) {
-      console.log(error.message)
-    }
-  }
+  const { panel, collabPanel, frontPanel } = useSelector(x => x)
 
   return (
     <div className="admin-container">
@@ -98,8 +82,7 @@ export default function Dashboard({ _projects, _media, _collaborations }) {
 }
 
 export async function getServerSideProps(req) {
-
-  const session = await getSession({ req: req.req });
+  const session = await getSessionFromCookie(req.req);
 
   if (!session?.user) {
     return {
@@ -110,7 +93,7 @@ export async function getServerSideProps(req) {
     };
   }
 
-  const baseURI = process.env.NODE_ENV=== 'production' ? "https://annapapadopoulou.me" : 'http://localhost:3000'
+  const baseURI = process.env.NODE_ENV === 'production' ? "https://annapapadopoulou.me" : 'http://localhost:3000'
 
   const projects = await axios.get(baseURI + '/api/project')
   const collaborations = await axios.get(baseURI + '/api/collab')
