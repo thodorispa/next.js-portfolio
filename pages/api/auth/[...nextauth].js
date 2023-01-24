@@ -33,7 +33,6 @@ export const authOptions = {
           await account.save()
 
           return account.username;
-          
         } catch (e) {
           console.log(e);
         }

@@ -25,16 +25,16 @@ export default function Login() {
       signIn('credentials', {
         username,
         password,
-        redirect: 'false',
+        redirect: 'true',
         callbackUrl: url
-      }).then(response => {
+      }).then(res => {
+        alert(response);
         if (response.ok) {
           router.push("/admin")
         } 
       }).catch(error => {
         console.log(error)
       })
-
 
     } catch (error) {
       setError(error.response.data)
