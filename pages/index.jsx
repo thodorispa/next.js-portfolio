@@ -18,7 +18,7 @@ export default function Index({ _media }) {
 
 export async function getServerSideProps() {
 
-  const baseURI = process.env.NODE_ENV === 'production' ? "https://annapapadopoulou.me/" : 'http://localhost:3000'
+  const baseURI = process.env.NODE_ENV === 'production' ? "https://annapapadopoulou.me" : 'http://localhost:3000'
 
   const { data } = await axios.get(baseURI + '/api/media')
   const _media = data[0] || { name: '', images: [] }

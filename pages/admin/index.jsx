@@ -110,7 +110,7 @@ export async function getServerSideProps(req) {
     };
   }
 
-  const baseURI = process.env.NODE_ENV=== 'production' ? "https://annapapadopoulou.me/" : 'http://localhost:3000'
+  const baseURI = process.env.NODE_ENV=== 'production' ? "https://annapapadopoulou.me" : 'http://localhost:3000'
 
   const projects = await axios.get(baseURI + '/api/project')
   const collaborations = await axios.get(baseURI + '/api/collab')

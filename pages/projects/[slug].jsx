@@ -20,7 +20,7 @@ import Loader from '../../components/Loader'
  export async function getServerSideProps(ctx) {
   const slug = ctx.resolvedUrl.split("projects/")[1]
 
-  const baseURI = process.env.NODE_ENV=== 'production' ? "https://annapapadopoulou.me/" : 'http://localhost:3000'
+  const baseURI = process.env.NODE_ENV=== 'production' ? "https://annapapadopoulou.me" : 'http://localhost:3000'
   const { data } = await axios.get(baseURI + "/api/project/" + slug)
   const { project } = data || []
 
