@@ -12,6 +12,7 @@ export default function Home({ media }) {
   const { scroll } = useContext(SmoothScrollContext)
   const { view } = useSelector(x => x)
   const { hideNav } = useSelector(x => x)
+  const { modal } = useSelector(x => x);
   const dispatch = useDispatch();
 
   const [clickedImg, setClickedImg] = useState(null)
@@ -37,7 +38,7 @@ export default function Home({ media }) {
     }
   }, [])
 
-
+  console.log(hideNav);
   useEffect(() => {
     if (clickedImg) {
       scroll?.stop();
@@ -156,7 +157,7 @@ export default function Home({ media }) {
          {/* BACK TO TOP */}
         <a
         href="#top"
-        className="back-to-top-btn"
+        className={ !modal ? "back-to-top-btn" : "hide-back-to-top"}
         onClick={goToTop}
       >
         <AnimatePresence>

@@ -10,6 +10,7 @@ const CollaborationTitle = ({ collaboration }) => {
 
   const { scroll } = useContext(SmoothScrollContext);
   const { view } = useSelector((x) => x);
+  const { modal } = useSelector(x => x);
   const dispatch = useDispatch();
 
   const [clickedImg, setClickedImg] = useState(null);
@@ -114,7 +115,7 @@ const CollaborationTitle = ({ collaboration }) => {
       {/* BACK TO TOP */}
      <a
         href="#top"
-        className="back-to-top-btn"
+        className={ !modal ? "back-to-top-btn" : "hide-back-to-top"}
         onClick={goToTop}
       >
         <AnimatePresence>
