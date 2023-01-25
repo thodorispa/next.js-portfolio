@@ -107,7 +107,7 @@ img {
   bottom: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(231, 231, 231, 0.913);
+  background-color: rgba(231, 231, 231, 0.422);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
 }
@@ -116,7 +116,7 @@ img {
   .modal-container {
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
-    background-color: rgba(255, 255, 255, 0.828);  
+    background-color: rgba(255, 255, 255, 0.422);  
   }
 }
 
