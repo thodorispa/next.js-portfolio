@@ -546,20 +546,26 @@ and (max-width: 420px) {
 .master-container > header {
   flex: 0 0 auto;
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: space-around;
   width: 100%;
   padding: 80px 0px 20px;
   margin-bottom: 20px;
-  border-bottom: 1px solid #1f3fff;
+}
+
+.master-container > article {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
 }
 @media (max-width: 1000px) {
   .master-container > header {
-    padding: 15px 0 5px;
+    padding: 60px 0 5px;
     align-items: center;
   }
 }
-
 @media only screen and (max-width: 600px) {
   header .logout > span {
     display: none;

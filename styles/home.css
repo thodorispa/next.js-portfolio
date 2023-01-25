@@ -270,8 +270,11 @@ img {
   }
 }
 @media only screen 
-and (max-width: 420px)
-and (min-height: 700px) {
+and (max-width: 420px) {
+  .banner-not-found h1{
+    font-size: 150px;
+  }
+
   .home-container {
     padding: 80px 0px;
     justify-content: space-around;

@@ -7,9 +7,9 @@ const NotFound = () => {
     <Head>
       <title>Page Not Found</title>
     </Head>
-    <div className="home-container">
+    <div className="master-container">
     <header>
-      <h1>Looks like there is nothing here</h1>
+      <h1>Looks like there is nothing here.</h1>
     </header>
     <article className="banner-not-found">
       <h1>404</h1>

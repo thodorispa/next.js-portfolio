@@ -38,7 +38,6 @@ export default function Home({ media }) {
     }
   }, [])
 
-  console.log(hideNav);
   useEffect(() => {
     if (clickedImg) {
       scroll?.stop();

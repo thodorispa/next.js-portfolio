@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
+import Head from 'next/head'
 import { useDispatch, useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import { container, item } from "../../styles/framer-motion/AnimateProject";
@@ -50,6 +51,9 @@ const ProjectTitle = ({ project }) => {
 
   return project ? (
     <>
+     <Head>
+        <title>{project.title}</title>
+      </Head>
       <div data-scroll-section className="project-container">
         <motion.header
           data-scroll

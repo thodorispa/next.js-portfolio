@@ -101,6 +101,10 @@ const Collaborations = ({ collaborations, router }) => {
         </div>
     </>
   ) : (
+    <>
+    <Head>
+        <title>Collaborations</title>
+      </Head>
     <div style={{padding: "160px 40px 80px"}}>
       <motion.article
         variants={containerFeed}
@@ -112,6 +116,7 @@ const Collaborations = ({ collaborations, router }) => {
         </motion.h1>
       </motion.article>
     </div>
+    </>
   );
 };
 

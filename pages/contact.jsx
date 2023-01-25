@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head'
 import { container, item } from '../styles/framer-motion/AnimateContact'
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -6,6 +7,9 @@ const Contact = () => {
   return (
     <AnimatePresence>
       <>
+      <Head>
+        <title>Contact</title>
+      </Head>
         <motion.section
           className="contact-container"
           variants={container}
