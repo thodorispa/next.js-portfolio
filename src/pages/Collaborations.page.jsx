@@ -101,7 +101,7 @@ const Collaborations = ({ collaborations, router }) => {
         </div>
     </>
   ) : (
-    <div className="master-container">
+    <div style={{padding: "160px 40px 80px"}}>
       <motion.article
         variants={containerFeed}
         initial="hidden"

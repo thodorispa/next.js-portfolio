@@ -114,17 +114,31 @@
   }
 }
 
-@media screen and (max-width: 900px),
-screen and (max-height: 500px) {
-  .project-images, .header-image {
-    max-width: 500px;
-    max-height: 350px;
-    object-fit: contain;
+@media screen 
+  and (min-width: 500px)
+  and (max-width: 900px)
+  and (min-height: 350px)
+  and (orientation: landscape)
+    {
+      .project-container {
+        padding: 20px 40px 80px;
+      }
+      .project-images img {
+        max-height: 350px;
+        object-fit: contain;
+      }
+      .header-image img {
+        max-height: 350px;
+        object-fit: contain;
+      }
+      .project-feed {
+        margin-top: 0;
+      }
   }
-}
 
-@media screen and (max-width: 420px),
-screen and (max-height: 500px) {
+@media only screen 
+  and (max-width: 420px)
+  and (min-height: 500px) {
   .thumbnail {
     max-width: 350px;
   }

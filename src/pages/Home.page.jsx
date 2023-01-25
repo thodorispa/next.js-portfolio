@@ -128,7 +128,7 @@ export default function Home({ media }) {
                           setImageIsLoaded(true)
                         }
                       }} />
-                      <span dangerouslySetInnerHTML={{__html:image.caption}}></span>
+                      <span className="home-captions" dangerouslySetInnerHTML={{__html:image.caption}}></span>
                   </motion.div>
                 </motion.div>
               ))

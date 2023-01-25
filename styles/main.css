@@ -2,33 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400;1,600&family=Ubuntu:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 @font-face {
-  font-family: 'FragmentMono';
-  src: url('../public/FragmentMono-Regular.ttf') format('truetype');
-}
-@font-face {
-  font-family: 'SourceCodePro';
-  src: url('../public/SourceCodePro.woff') format('truetype');
-}
-@font-face {
-  font-family: 'SourceCodePro-Medium';
-  src: url('../public/SourceCodePro-Medium.woff') format('truetype');
-}
-@font-face {
   font-family: 'RobotoMono';
-  src: url('../public/RobotoMono.woff') format('truetype');
+  src: url('../public/RobotoMono.ttf') format('truetype');
 }
-@font-face {
-  font-family: 'IBMPlexSans-ExtraLight';
-  src: url('../public/IBMPlexSans-ExtraLight.woff') format('truetype');
-}
-@font-face {
-  font-family: 'IBMPlexSans-Regular';
-  src: url('../public/IBMPlexSans-Regular.woff') format('truetype');
-}
-@font-face {
-  font-family: 'IBMPlexSans-Light';
-  src: url('../public/IBMPlexSans-Light.woff') format('truetype');
-}
+
 html.has-scroll-smooth {
   overflow: hidden;
 }
@@ -553,6 +530,16 @@ details summary::marker {
     padding: 55px 5px;
   }
 }
+
+@media screen 
+  and (min-width: 500px)
+  and (max-width: 900px)
+  and (min-height: 350px)
+  and (orientation: landscape) {
+    .master-container {
+      padding: 20px 40px 80px;
+    }
+  }
 
 .master-container > header {
   flex: 0 0 auto;

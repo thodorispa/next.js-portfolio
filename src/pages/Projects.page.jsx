@@ -92,7 +92,7 @@ const Projects = ({ projects, router }) => {
                         alt={project.images[0].name}
                         unoptimized
                       />
-                      <h1 style={{ padding: "10px  " }}>{project.title}</h1>
+                      <h1 style={{ padding: "10px" }}>{project.title}</h1>
                     </motion.section>
                   </Link>
                 ))}
@@ -101,7 +101,7 @@ const Projects = ({ projects, router }) => {
         </div>
     </>
   ) : (
-    <div className="master-container">
+    <div style={{padding: "160px 40px 80px"}}>
       <motion.article
         variants={containerFeed}
         initial="hidden"
