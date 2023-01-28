@@ -1,7 +1,7 @@
 import React from "react";
 import App from 'next/app'
 import { Provider } from 'react-redux';
-import { getSession, SessionProvider }from 'next-auth/react' ;
+import { getSession, SessionProvider, useSession }from 'next-auth/react' ;
 
 import { store } from "../store/index";
 
@@ -20,11 +20,12 @@ import "../styles/panel.css";
 import "../styles/quill.css";
 import "../styles/admin.css";
 import "../styles/contact.css";
-
+import { getSessionFromCookie } from "../helpers/getSessionFromCookie";
 
 const MyApp = ({ Component, pageProps, router }) => {
 
   const { user, nav, view, modal, hideNav, session } = pageProps
+  console.log('session', session);
 
   return (
     <>
@@ -49,8 +50,9 @@ const MyApp = ({ Component, pageProps, router }) => {
 
 MyApp.getInitialProps = async (ctx) => {
   const { pageProps } = await App.getInitialProps(ctx)
+  const session = await getSessionFromCookie(ctx.ctx);
 
-  return { pageProps: { ...pageProps} }
+  return { pageProps: { ...pageProps, session } }
 }
 
 export default MyApp;

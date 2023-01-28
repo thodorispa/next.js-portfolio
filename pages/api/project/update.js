@@ -4,7 +4,8 @@ import Project from '../../../models/Project.js'
 import { uploadToFirebaseStorage } from '../../../helpers/firebase.js';
 import { firebaseOptions } from '../../../lib/firebaseOptions.js';
 import slugify from "slugify";
-
+import { unstable_getServerSession } from "next-auth/next"
+import Nextauth from '../auth/[...nextauth]b.js';
 export const config = {
   api: {
       bodyParser: {
@@ -16,7 +17,7 @@ export const config = {
 export default async function userHandler(req, res) {
   await db();
   const { method } = req
-  
+
   switch (method) {
     case 'POST':
       try {
@@ -25,8 +26,7 @@ export default async function userHandler(req, res) {
         const { subTitle } = req.body
         const { description } = req.body
         const { images } = req.body || []
-        const { active } = req.body
-    
+        const { active } = req.body     
     
         const new_images = []
     
@@ -75,5 +75,4 @@ export default async function userHandler(req, res) {
       res.setHeader('Allow', ['POST'])
       res.status(405).end(`Method ${method} Not Allowed`)
   }
-
 }

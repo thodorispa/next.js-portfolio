@@ -7,12 +7,15 @@ export async function getSessionFromCookie(req) {
     const sessionToken = req.cookies?.[`${cookiePrefix}next-auth.session-token`]
   
     if (!sessionToken) return null
+
+    console.log('sessionToken', sessionToken);
     let decoded = null
     try {
       decoded = await jwt.decode({ secret: process.env.SECRET, token: sessionToken })
     } catch (error) {
       console.log(error)
     }
+
     if (!decoded) return null
     
     return {

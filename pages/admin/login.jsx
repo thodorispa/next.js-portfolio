@@ -25,7 +25,7 @@ export default function Login() {
       signIn('credentials', {
         username,
         password,
-        redirect: 'true',
+        redirect: 'false',
         callbackUrl: url
       }).then(res => {
         alert(response);

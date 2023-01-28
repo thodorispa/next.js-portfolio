@@ -4,6 +4,7 @@ import NextAuth from "next-auth"
 import CredentialsProvider from "next-auth/providers/credentials"
 import Account from '../../../models/Account';
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
 
 export const authOptions = {
   providers: [
@@ -28,11 +29,18 @@ export const authOptions = {
             return ;
           }
 
+          const token = jwt.sign({ account }, process.env.SECRET || '123')
+          
+
           account.lastLoginAt = Date.now()
 
           await account.save()
 
-          return account.username;
+          return {  
+            name: account.username,
+            id: account._id,
+          }
+          
         } catch (e) {
           console.log(e);
         }
@@ -53,10 +61,12 @@ export const authOptions = {
   secret: process.env.SECRET,
   callbacks: {
     async session({ session, token }) {
-      session.user = token.user;
+      session.user = token;
+      console.log('session', session, token);
       return session;
     },
     async jwt({ token, user }) {
+      
       if (user) {
         token.user = user;
       }

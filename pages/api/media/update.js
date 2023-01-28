@@ -18,9 +18,11 @@ export default async function userHandler(req, res) {
   switch (method) {
     case 'POST':
       try {
+        console.log('hello');
         const { images } = req.body || [];
 
         let _frontImages = await Images.findOne({ name: 'front' }) || new Images({ name: 'front' })
+        console.log(_frontImages);
 
         const _images = images?.map(image => image.hash) || []
         const _originalImages = _frontImages.images?.map(image => image.hash) || []

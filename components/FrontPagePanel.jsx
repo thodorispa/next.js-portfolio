@@ -62,11 +62,13 @@ export default function FrontPagePanel({ _media }) {
     setEditedMedia(editedMedia => ({ ...editedMedia, images: editedMedia?.images.map(n => n.url === imageAttributes?.url ? { ...n, caption: caption } : n) }))
   }, [caption]);
 
+  console.log(editedMedia);
   const onUpdate = async () => {
     setIsLoading(true);
     if (!isEqual(media, editedMedia)) {
       try {
         await axios.post('/api/media/update', editedMedia)
+        console.log('updated');
 
         setMedia(editedMedia);
 

@@ -27,7 +27,7 @@ export default async function userHandler(req, res) {
           return;
         }
 
-        const token = jwt.sign({ account }, process.env.JWT_SECRET || '123')
+        const token = jwt.sign({ account }, process.env.SECRET || '123')
 
         account.lastLoginAt = Date.now()
 

@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import axios from "axios";
 import cloneDeep from 'lodash.clonedeep'
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filesToDataUrl } from "../helpers/helpers";
 
@@ -69,7 +69,7 @@ export default function ProjectPanel() {
   }, [originalProject], []);
 
   useEffect(() => {
-    setEditedProject(editedProject => ({ ...editedProject, images: editedProject?.images.map(n => n.url === imageAttributes?.url ? { ...n, caption: caption } : n) }))
+    setEditedProject(editedProject => ({ ...editedProject, images: editedProject?.images?.map(n => n.url === imageAttributes?.url ? { ...n, caption: caption } : n) }))
   }, [caption]);
 
   const accept = ['image/jpeg', 'image/png']
@@ -97,6 +97,7 @@ export default function ProjectPanel() {
           setOriginalProject(cloneDeep(data._project));
           setEditedProject(cloneDeep(data._project));
         } else {
+          setImageAttributes({})
           const { data } = await axios.post('/api/project/update', editedProject)
           setOriginalProject(cloneDeep(data._project));
           setEditedProject(cloneDeep(data._project));
@@ -169,7 +170,7 @@ export default function ProjectPanel() {
         </label>
       </header>
 
-      <main style={{ 
+      <main style={{
         width: 'calpoc(100% - 100px)',
         overflow: 'hidden'
       }}>
@@ -283,88 +284,86 @@ export default function ProjectPanel() {
               justifyContent: 'flex-start'
             }}
           >
-            <section>
-              <DndContext
-                sensors={sensors}
-                collisionDetection={closestCenter}
-                onDragEnd={handleDragEnd}
+
+            <DndContext
+              sensors={sensors}
+              collisionDetection={closestCenter}
+              onDragEnd={handleDragEnd}
+            >
+              <SortableContext
+                items={editedProject?.images?.map(n => n.url)}
+                strategy={rectSortingStrategy}
               >
-                <SortableContext
-                  items={editedProject?.images?.map(n => n.url)}
-                  strategy={rectSortingStrategy}
-                >
-                  <article
+                <article
                   style={{
                     justifyContent: 'flex-start',
                   }}>
 
-                    {editedProject?.images?.map((n, i) => (
-                      <article key={i}>
-                        <SortableItem
-                          key={n.url}
-                          id={n.url}
-                          new={editedProject?.id === -1 ? true : false}
-                          removable={true}
+                  {editedProject?.images?.map((n, i) => (
+                    <article key={i}>
+                      <SortableItem
+                        key={n.url}
+                        id={n.url}
+                        new={editedProject?.id === -1 ? true : false}
+                        removable={true}
+                        style={{
+                          position: 'relative',
+                          margin: '2.5px',
+                          width: '130px',
+                          height: '120px',
+                        }}
+                        dragHandleStyle={{
+                          position: 'absolute',
+                          top: '5px',
+                          left: '5px',
+                        }}
+                      >
+                        <Image
+                          draggable={false}
+                          priority
+                          src={n.objectUrl ? n.objectUrl : n.url}
+                          alt={n.alt || ''}
                           style={{
-                            position: 'relative',
-                            margin: '2.5px',
-                            width: '130px',
-                            height: '120px',
+                            width: '100%',
+                            height: '100%',
+                            cursor: 'pointer',
+                            borderRadius: n.url === imageAttributes?.url ? '50% 20% / 10% 40%' : '0px'
+                            ,
                           }}
-                          dragHandleStyle={{
+                          width={n.width}
+                          height={n.height}
+                          unoptimized={() => { n.objectUrl }}
+                          onClick={() => {
+                            setImageAttributes(n)
+                          }}
+                        />
+                        <button
+                          className="negative"
+                          style={{
                             position: 'absolute',
                             top: '5px',
-                            left: '5px',
+                            right: '5px',
+                            flex: '0 0 16px',
+                            width: '16px',
+                            height: '16px',
+                            color: 'tomato',
+                            padding: '0',
+                            border: '0',
+                            backgroundColor: 'transparent',
+                            transition: 'none',
+                            transform: 'none',
                           }}
+                          onClick={() => handleImageDelete(i)}
                         >
-                          <Image
-                            draggable={false}
-                            priority
-                            src={n.objectUrl ? n.objectUrl : n.url}
-                            alt={n.alt || ''}
-                            style={{
-                              width: '100%',
-                              height: '100%',
-                              cursor: 'pointer',
-                              borderRadius: n.url === imageAttributes?.url ? '50% 20% / 10% 40%' : '0px'
-                              ,
-                            }}
-                            width={n.width}
-                            height={n.height}
-                            unoptimized={() => { n.objectUrl }}
-                            onClick={() => {
-                              setImageAttributes(n)
-                            }}
-                          />
-                          <button
-                            className="negative"
-                            style={{
-                              position: 'absolute',
-                              top: '5px',
-                              right: '5px',
-                              flex: '0 0 16px',
-                              width: '16px',
-                              height: '16px',
-                              color: 'tomato',
-                              padding: '0',
-                              border: '0',
-                              backgroundColor: 'transparent',
-                              transition: 'none',
-                              transform: 'none',
-                            }}
-                            onClick={() => handleImageDelete(i)}
-                          >
-                            <FontAwesomeIcon icon={faTrashAlt} />
-                          </button>
+                          <FontAwesomeIcon icon={faTrashAlt} />
+                        </button>
 
-                        </SortableItem>
-                      </article>
-                    ))}
-                  </article>
-                </SortableContext>
-              </DndContext>
-            </section>
-
+                      </SortableItem>
+                    </article>
+                  ))}
+                </article>
+              </SortableContext>
+            </DndContext>
           </section>
           {editedProject?.images?.length > 0 ? (
             <section >
@@ -379,7 +378,6 @@ export default function ProjectPanel() {
                 rows={2}
                 cols={30}
                 value={imageAttributes.alt}
-                // value={{ ...n }.alt || ''}
                 onChange={(e) => {
                   const _images = [...editedProject.images]
                   const _image = _images.find(x => x.url === imageAttributes.url)
