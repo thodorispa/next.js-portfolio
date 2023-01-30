@@ -31,11 +31,11 @@ export default async function userHandler(req, res) {
 
         for (let i = 0; i < _imagesToDelete.length; i++) {
           const image = _frontImages.images.find(image => image.hash === _imagesToDelete[i])
+          _frontImages.images = _frontImages.images.filter(image => image.hash !== _imagesToDelete[i])
 
           const res = await deleteFromFirebaseStorage(image.hash, firebaseOptions, 'front/')
         }
-        
-        _frontImages.images = _frontImages.images.filter(image => image.hash !== _imagesToDelete[i])
+
 
 
         for (let i = 0; i < _imagesToUpload.length; i++) {
