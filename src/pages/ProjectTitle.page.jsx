@@ -40,7 +40,7 @@ const ProjectTitle = ({ project }) => {
     event.preventDefault();
     scroll && scroll.scrollTo(0);
   };
-
+  console.log(project.images);
   useEffect(() => {
     if (clickedImg) {
       scroll?.stop();
@@ -77,6 +77,11 @@ const ProjectTitle = ({ project }) => {
             src={project.images[0].url}
             alt={project.images[0].alt}
             variants={item}
+          />
+          <motion.span
+            dangerouslySetInnerHTML={{ __html: project.images[0].caption }}
+            variants={item}
+            style={{textAlign: "center"}}
           />
           <motion.div
             dangerouslySetInnerHTML={{ __html: project.description }}

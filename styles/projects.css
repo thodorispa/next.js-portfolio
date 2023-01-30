@@ -86,7 +86,6 @@
   position: relative;
   width: 85%;
   max-height: 650px;
-  margin-bottom: 30px;
   overflow: auto;
   -o-object-fit: contain;
   object-fit: contain;
