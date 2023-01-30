@@ -179,7 +179,7 @@ const NavMenu = () => {
             nav
               ? {
                   x: -5,
-                  y: 3,
+                  y: -1.5,
                   transition: {
                     duration: 0.4,
                     type: "tween",
