@@ -110,7 +110,7 @@ const CollaborationTitle = ({ collaboration }) => {
                   loading="lazy"
                   onClick={() => handleClick(image, i)}
                 />
-                <span dangerouslySetInnerHTML={{__html:image.caption}}></span>
+                <span style={{textAlign: "center"}} dangerouslySetInnerHTML={{__html:image.caption}}></span>
               </motion.section>
             ))}
         </section>

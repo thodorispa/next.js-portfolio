@@ -112,7 +112,7 @@ const ProjectTitle = ({ project }) => {
                   loading="lazy"
                   onClick={() => handleClick(image, i)}
                 />
-                <span dangerouslySetInnerHTML={{__html:image.caption}}></span>
+                <span style={{textAlign: "center"}} dangerouslySetInnerHTML={{__html:image.caption}}></span>
               </section>
             ))}
         </section>
