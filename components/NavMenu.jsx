@@ -32,7 +32,7 @@ const NavMenu = () => {
   }, []);
 
   useEffect(() => {
-    if (windowSize?.innerWidth > 420 && windowSize?.innerHeight > 420) {
+    if (windowSize?.innerWidth > 430 && windowSize?.innerHeight > 430) {
       dispatch({ type: "SET_VIEW", payload: true })
     } else {
       dispatch({ type: "SET_VIEW", payload: false })

@@ -114,7 +114,7 @@
 } */
 
 @media only screen 
-and (max-width: 420px) {
+and (max-width: 430px) {
   .thumbnail {
     max-width: 350px;
   }

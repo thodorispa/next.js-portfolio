@@ -527,7 +527,7 @@ details summary::marker {
 }
 
 @media only screen 
-and (max-width: 420px) {
+and (max-width: 430px) {
   .master-container {
     padding: 55px 5px;
   }

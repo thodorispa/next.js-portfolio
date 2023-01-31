@@ -78,7 +78,7 @@ const Projects = ({ projects, router }) => {
                     <motion.section
                       className="project"
                       variants={itemFeed}
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={ view ? { scale: 1.1 } : ""}
                       transition={{ type: "spring", stiffness: 400, damping: 100 }}
                     >
                       <Image

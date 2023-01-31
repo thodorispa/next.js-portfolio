@@ -48,7 +48,7 @@ const Collaborations = ({ collaborations, router }) => {
                     key={i}
                     className="project"
                     variants={itemFeed}
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={ view ? { scale: 1.1 } : ""}
                     transition={{ type: "spring", stiffness: 400, damping: 100 }}
                     onClick={() => {
                       dispatch({ type: "SET_COLLAB_PANEL", payload: !panel })
