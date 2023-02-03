@@ -15,7 +15,7 @@ const Contact = () => {
           variants={container}
           initial="hidden"
           animate="show">
-          <motion.h1 className="contact-title" variants={item}>Contact</motion.h1>
+          <motion.h1 className="contact-title" variants={item}>Contact Info</motion.h1>
           <motion.h2 className="contact-subtitle" variants={item}>Anna Papadopoulou</motion.h2>
           <motion.section className="social-info" variants={item}>
             <motion.article

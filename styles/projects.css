@@ -7,7 +7,7 @@
   flex-wrap: nowrap;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 160px 40px 80px;
+  padding: 80px 40px 80px;
 }
 .project-feed h1 {
   font-size: 16px !important;
@@ -52,7 +52,6 @@
   word-wrap: break-word;
   padding: 20px;
   max-width: 800px;
-  cursor: pointer;
   will-change: transform, opacity;
   object-fit: contain;
 }
@@ -60,6 +59,11 @@
 .project-images img {
   max-height: 750px;
   object-fit: contain;
+  cursor: pointer;
+}
+
+.project-images section > span {
+  max-width: inherit;
 }
 
 .thumbnail {

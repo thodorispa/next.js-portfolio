@@ -72,11 +72,13 @@ const CollaborationTitle = ({ collaboration }) => {
             {" "}
             {collaboration.subTitle}{" "}
           </motion.h3>
+          {collaboration.description === "<p><br></p>" ? "" : 
           <motion.div
             dangerouslySetInnerHTML={{ __html: collaboration.description }}
             variants={item}
             className="description"
           />
+        }
         </motion.header>
 
         <section
@@ -110,7 +112,7 @@ const CollaborationTitle = ({ collaboration }) => {
                   loading="lazy"
                   onClick={() => handleClick(image, i)}
                 />
-                <span style={{textAlign: "center"}} dangerouslySetInnerHTML={{__html:image.caption}}></span>
+                <span style={{textAlign: "left", alignSelf: "flex-start"}} dangerouslySetInnerHTML={{__html:image.caption}}></span>
               </motion.section>
             ))}
         </section>

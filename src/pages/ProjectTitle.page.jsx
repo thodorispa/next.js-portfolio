@@ -40,7 +40,7 @@ const ProjectTitle = ({ project }) => {
     event.preventDefault();
     scroll && scroll.scrollTo(0);
   };
-  console.log(project.images);
+  console.log(project);
   useEffect(() => {
     if (clickedImg) {
       scroll?.stop();
@@ -83,11 +83,13 @@ const ProjectTitle = ({ project }) => {
             variants={item}
             style={{textAlign: "center"}}
           />
+          {project.description === "<p><br></p>" ? "" : 
           <motion.div
             dangerouslySetInnerHTML={{ __html: project.description }}
             variants={item}
             className="description"
           />
+        }
         </motion.header>
 
         <section
@@ -112,7 +114,7 @@ const ProjectTitle = ({ project }) => {
                   loading="lazy"
                   onClick={() => handleClick(image, i)}
                 />
-                <span style={{textAlign: "center"}} dangerouslySetInnerHTML={{__html:image.caption}}></span>
+                <span style={{textAlign: "left", alignSelf: "flex-start"}} dangerouslySetInnerHTML={{__html:image.caption}}></span>
               </section>
             ))}
         </section>
