@@ -20,7 +20,7 @@
   will-change: transform, opacity;
 }
 .project-details {
-  margin-top: 140px;
+  margin-top: 80px;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
@@ -149,6 +149,9 @@ and (max-width: 430px) {
   }
   .project-images span {
     font-size: 15px;
+  }
+  .project-details {
+    margin-top: 0;
   }
 }
 

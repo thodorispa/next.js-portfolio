@@ -23,7 +23,7 @@ const Collaborations = ({ collaborations, router }) => {
     }
   }, [])
 
-  return collaborations.length > 0 ? (
+  return collaborations?.length > 0 ? (
     <>
       <Head>
         <title>Collaborations</title>
@@ -86,10 +86,10 @@ const Collaborations = ({ collaborations, router }) => {
                         priority
                         blurDataURL={collab.images[0]?.base64}
                         placeholder="blur"
-                        src={collab.images[0].url}
-                        width={collab.images[0].width}
-                        height={collab.images[0].height}
-                        alt={collab.images[0].name}
+                        src={collab.images[0]?.url}
+                        width={collab.images[0]?.width}
+                        height={collab.images[0]?.height}
+                        alt={collab.images[0]?.name}
                         unoptimized
                       />
                       <h1 style={{ padding: "10px  " }}>{collab.title}</h1>

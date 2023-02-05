@@ -236,7 +236,7 @@ const NavMenu = () => {
             }
           : {
             transition: {
-              duration: 0.4,
+              duration: 1,
               type: "spring",
               stiffness: 400,
               damping: 50,
@@ -249,7 +249,7 @@ const NavMenu = () => {
           variants={containerSmall}
           initial="hidden"
           animate={nav ? "show" : "hide"}
-          transition={{duration: 0.3, bounce: 0}}
+          transition={{duration: 1, bounce: 0}}
         >
           <Link href="/">
             <motion.li
@@ -293,12 +293,12 @@ const NavMenu = () => {
           initial={{
             x: -10,
             transition: {
-              duration: 0.2,
-              type: "spring",
-              stiffness: 300,
+              duration: 1.4,
+              type: "tween",
+              stiffness: 400,
               damping: 90,
               bounce: 0,
-            }
+            },
           }}
           animate={
             nav
@@ -306,32 +306,38 @@ const NavMenu = () => {
                   x: -50,
                   transition: {
                     duration: 0.4,
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 40,
-                    bounce: 0,
+                    type: "tween",
+                    stiffness: 400,
                   },
                 }
               : {
                   x: -10,
                   transition: {
                     duration: 0.4,
-                    type: "spring",
-                    stiffness: 300,
-                    damping: 40,
+                    stiffness: 400,
+                    damping: 90,
+                    type: "tween",
                     bounce: 0,
                   },
                 }
           }
-          transition= {{
+          exit={{transition: {
             duration: 0.4,
-            type: "spring",
-            stiffness: 300,
-            damping: 40,
-            bounce: 0,
-          }}
+            type: "tween",
+          },}}
+          // transition= {{
+          //   duration: 0.4,
+          //   type: "spring",
+          //   stiffness: 300,
+          //   damping: 40,
+          //   bounce: 0,
+          // }}
         >
           <motion.i
+          initial={{transition: {
+            duration: 0.4,
+            type: "tween",
+          },}}
             className={
               nav
                 ? "fa-solid fa-xmark icon-default"

@@ -98,7 +98,7 @@ const CollaborationTitle = ({ collaboration }) => {
               animate={{
                 opacity: 1,
                 transition: {
-                  delay: 1.2
+                  delay: 1.8
                 }
               }}>
                 <OptImage

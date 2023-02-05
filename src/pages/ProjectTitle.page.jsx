@@ -89,7 +89,7 @@ const ProjectTitle = ({ project }) => {
             variants={item}
             className="description"
           />
-        }
+        } 
         </motion.header>
 
         <section
@@ -102,7 +102,14 @@ const ProjectTitle = ({ project }) => {
             .sort((a, b) => a.index - b.index)
             .slice(1)
             .map((image, i) => (
-              <section key={i} className="project-images">
+              <motion.section 
+              initial={{opacity: 0}}
+              animate={{
+                opacity: 1,
+              transition: {
+                delay: 1.8,
+              }}}
+              key={i} className="project-images">
                 <OptImage 
                   src={image.url}
                   alt={image.alt}
@@ -115,7 +122,7 @@ const ProjectTitle = ({ project }) => {
                   onClick={() => handleClick(image, i)}
                 />
                 <span style={{textAlign: "left", alignSelf: "flex-start"}} dangerouslySetInnerHTML={{__html:image.caption}}></span>
-              </section>
+              </motion.section>
             ))}
         </section>
       </div>
