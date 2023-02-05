@@ -5,8 +5,8 @@ export const container = {
     transition: {
       duration: 1,
       type: "spring",
-      delayChildren: 0.3,
-      staggerChildren: 0.3,
+      delayChildren: 0.2,
+      staggerChildren: 0.2,
     }
   }
 }
@@ -20,7 +20,7 @@ export const item = {
       type: "spring",
       stiffness: 500,
       damping: 100,
-      delayChildren: 0.3,
-      staggerChildren: 0.3,}
+      delayChildren: 0.2,
+      staggerChildren: 0.2,}
   }
 }
