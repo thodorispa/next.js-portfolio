@@ -99,10 +99,12 @@
 .project-title {
   font-size: 30px;
   padding-bottom: 20px;
+  text-align: center;
 }
 .project-subtitle {
   font-size: 20px;
   padding-bottom: 20px;
+  text-align: center;
 }
 
 @media screen and (min-width: 1800px) {
@@ -130,7 +132,7 @@ and (max-width: 430px) {
     font-size: 17px;
   }
   .project-container {
-    padding: 20px 10px 20px;
+    padding: 60px 10px 20px;
   }
   .header-project > div {
     width: 100%;

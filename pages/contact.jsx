@@ -45,7 +45,7 @@ const Contact = () => {
               }
             }}
             exit={{ opacity: 0 }}>
-            <h4>&copy; All Rights Reserved 2022</h4>
+            <h4>&copy; All Rights Reserved 2023</h4>
             <h4>&nbsp;Developed by TDE Studio</h4>
           </motion.article>
         </motion.section>
