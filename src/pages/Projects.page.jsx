@@ -86,10 +86,10 @@ const Projects = ({ projects, router }) => {
                         priority
                         blurDataURL={project.images[0]?.base64}
                         placeholder="blur"
-                        src={project.images[0].url}
-                        width={project.images[0].width}
-                        height={project.images[0].height}
-                        alt={project.images[0].name}
+                        src={project.images[0]?.url}
+                        width={project.images[0]?.width}
+                        height={project.images[0]?.height}
+                        alt={project.images[0]?.name}
                         unoptimized
                       />
                       <h1 style={{ padding: "10px" }}>{project.title}</h1>
