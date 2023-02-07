@@ -9,6 +9,12 @@ const Contact = () => {
       <>
       <Head>
         <title>Contact</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charset="UTF-8"/>
+        <meta name="description" content="Contact information of Anna Papadopoulou"/>
+        <meta name="keywords" content="HTML,CSS,JavaScript,Next.js, Node.js"/>
+        <meta name="author" content="TDE Studio"/>
+        <meta name="robots" content="noindex, nofollow"/>
       </Head>
         <motion.section
           className="contact-container"

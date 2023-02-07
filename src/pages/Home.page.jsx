@@ -61,9 +61,12 @@ export default function Home({ media }) {
         <Head>
           <title>Anna Papadopoulou</title>
           <link rel="icon" href="/favicon.ico" />
-          <meta name="description" content="Anna Papadopoulou photography "/>
+          <meta charset="UTF-8"/>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <meta name="description" content="Anna Papadopoulou photography home page"/>
           <meta name="keywords" content="HTML,CSS,JavaScript,Next.js, Node.js"/>
           <meta name="author" content="TDE Studio"/>
+          <meta name="robots" content="index, nofollow"/>
         </Head>
 
         <AnimatePresence enterBeforeExit>

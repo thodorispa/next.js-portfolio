@@ -27,6 +27,12 @@ const Projects = ({ projects, router }) => {
     <>
       <Head>
         <title>Projects</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charset="UTF-8"/>
+        <meta name="description" content="Photography projects curated by Anna Papadopoulou"/>
+        <meta name="keywords" content="HTML,CSS,JavaScript,Next.js, Node.js"/>
+        <meta name="author" content="TDE Studio"/>
+        <meta name="robots" content="index, follow"/>
       </Head>
       <div data-scroll-section className="master-container">
       {!view ? (

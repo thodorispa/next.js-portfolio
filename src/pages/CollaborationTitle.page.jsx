@@ -48,11 +48,17 @@ const CollaborationTitle = ({ collaboration }) => {
       scroll?.start();
     }
   }, [clickedImg]);
-
+  
   return collaboration ? (
     <>
      <Head>
         <title>{collaboration.title}</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="Anna Papadopoulou collaboration page with photos"/>
+        <meta name="keywords" content="HTML,CSS,JavaScript,Next.js, Node.js"/>
+        <meta name="author" content="TDE Studio"/>
+        <meta name="robots" content="noindex, nofollow"/>
       </Head>
       <div data-scroll-section className="project-container">
         <motion.header
@@ -72,7 +78,7 @@ const CollaborationTitle = ({ collaboration }) => {
             {" "}
             {collaboration.subTitle}{" "}
           </motion.h3>
-          {collaboration.description === "<p><br></p>" ? "" : 
+          {collaboration.description === "<p><br></p>" || collaboration.description === "" ? "" : 
           <motion.div
             dangerouslySetInnerHTML={{ __html: collaboration.description }}
             variants={item}

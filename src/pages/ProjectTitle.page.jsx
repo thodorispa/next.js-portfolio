@@ -40,7 +40,7 @@ const ProjectTitle = ({ project }) => {
     event.preventDefault();
     scroll && scroll.scrollTo(0);
   };
-  console.log(project);
+
   useEffect(() => {
     if (clickedImg) {
       scroll?.stop();
@@ -53,6 +53,12 @@ const ProjectTitle = ({ project }) => {
     <>
      <Head>
         <title>{project.title}</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta name="description" content="Anna Papadopoulou photography project page and photos"/>
+        <meta name="keywords" content="HTML,CSS,JavaScript,Next.js, Node.js"/>
+        <meta name="author" content="TDE Studio"/>
+        <meta name="robots" content="noindex, nofollow"/>
       </Head>
       <div data-scroll-section className="project-container">
         <motion.header
@@ -83,7 +89,7 @@ const ProjectTitle = ({ project }) => {
             variants={item}
             style={{textAlign: "center"}}
           />
-          {project.description === "<p><br></p>" ? "" : 
+          {project.description === "<p><br></p>" || project.description === "" ? "" : 
           <motion.div
             dangerouslySetInnerHTML={{ __html: project.description }}
             variants={item}
