@@ -58,16 +58,40 @@ export default function Home({ media }) {
   return flag ? (
     <>
       <div data-scroll-section className="home-container">
-        <Head>
-          <title>Anna Papadopoulou</title>
-          <link rel="icon" href="/favicon.ico" />
-          <meta charset="UTF-8"/>
-          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-          <meta name="description" content="Anna Papadopoulou photography home page"/>
-          <meta name="keywords" content="HTML,CSS,JavaScript,Next.js, Node.js"/>
-          <meta name="author" content="TDE Studio"/>
-          <meta name="robots" content="index, nofollow"/>
-        </Head>
+      <Head>
+      <title>Anna Papadopoulou | Professional Photography</title>
+      <link rel="icon" href="/favicon.ico" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+      <link rel="manifest" href="/site.webmanifest" />
+      <link rel="canonical" href="https://annapapadopoulou.me/" />
+
+
+
+      <meta charset="UTF-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+
+      <meta name="title" content="Anna Papadopoulou | Professional Photography"/>
+      <meta name="description" content="Explore the world through the lens of Anna Papadopoulou. Discover captivating photography, portfolios, and the stories behind each shot."/>
+      <meta name="keywords" content="Photography, Portraits, Landscape, Anna Papadopoulou, Professional Photography, Next.js, Node.js"/>
+      
+
+      <meta property="og:type" content="website"/>
+      <meta property="og:url" content="https://annapapadopoulou.me/"/>
+      <meta property="og:title" content="Anna Papadopoulou | Professional Photography"/>
+      <meta property="og:description" content="Explore the world through the lens of Anna Papadopoulou. Discover captivating photography, portfolios, and the stories behind each shot."/>
+      <meta property="og:image" content="/path_to_preview_image.jpg"/>
+
+
+      <meta property="twitter:card" content="summary_large_image"/>
+      <meta property="twitter:url" content="https://annapapadopoulou.me/"/>
+      <meta property="twitter:title" content="Anna Papadopoulou | Professional Photography"/>
+      <meta property="twitter:description" content="Explore the world through the lens of Anna Papadopoulou. Discover captivating photography, portfolios, and the stories behind each shot."/>
+      <meta property="twitter:image" content="/path_to_preview_image.jpg"/>
+
+      <meta name="author" content="TDE Studio"/>
+      <meta name="robots" content="index, nofollow"/>
+</Head>
 
         <AnimatePresence enterBeforeExit>
           {!view ? (

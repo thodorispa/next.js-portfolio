@@ -1,11 +1,9 @@
 import React from "react";
 import App from 'next/app'
 import { Provider } from 'react-redux';
-import { getSession, SessionProvider, useSession }from 'next-auth/react' ;
+import { SessionProvider } from 'next-auth/react' ;
 
 import { store } from "../store/index";
-
-import { AnimatePresence } from  'framer-motion'
 
 import NavMenu from "../components/NavMenu"
 import Init from "../components/Init"
@@ -24,8 +22,7 @@ import { getSessionFromCookie } from "../helpers/getSessionFromCookie";
 
 const MyApp = ({ Component, pageProps, router }) => {
 
-  const { user, nav, view, modal, hideNav, session } = pageProps
-  console.log('session', session);
+  const { user, nav, view, hideNav, session } = pageProps
 
   return (
     <>
@@ -34,12 +31,12 @@ const MyApp = ({ Component, pageProps, router }) => {
           <link rel="stylesheet" href="https://use.typekit.net/kgg4bts.css" />
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
           <Init {...pageProps} user={user} nav={nav} view={view} hideNav={hideNav} />
-          <NavMenu {...pageProps} />
-          <Transition>
-            <main data-scroll-container>
-              <Component {...pageProps} key={router.route}/>
-            </main>
-          </Transition>
+            <NavMenu {...pageProps} />
+            <Transition>
+              <main data-scroll-container>
+                <Component {...pageProps} key={router.route}/>
+              </main>
+            </Transition>
         </Provider>
       </SessionProvider>
     </>
